@@ -1,0 +1,12 @@
+.env
+**/.env
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.streamlit/secrets.toml
+/cybershield-AIgit
+/git
+/demo
+pyfilesonly/demo
+*.db
