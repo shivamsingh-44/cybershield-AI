@@ -157,7 +157,21 @@ def combine_assessments(rule_score, rule_level, ai_result):
 
 def add_demo_post(author, message):
     rule_score, rule_level, matched = classify_message(message)
-    ai_result = analyze_with_ai(message)
+    # AI is optional: a model/import/runtime failure must not prevent saving
+    # the simulated post or displaying the rule-based assessment.
+    try:
+        ai_result = analyze_with_ai(message)
+        if not isinstance(ai_result, dict):
+            raise ValueError("AI returned an invalid result")
+    except Exception as exc:
+        ai_result = {
+            "label": "AI_UNAVAILABLE",
+            "confidence": None,
+            "explanation": f"AI analysis unavailable ({type(exc).__name__}); rule-based assessment retained.",
+            "model": "Unavailable",
+            "available": False,
+        }
+
     score, level, combined_reasons = combine_assessments(
         rule_score, rule_level, ai_result
     )
