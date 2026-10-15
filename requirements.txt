@@ -8,3 +8,4 @@ pytesseract
 transformers
 torch
 google-generativeai
+torchvision
