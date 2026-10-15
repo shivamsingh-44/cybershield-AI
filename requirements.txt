@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+requests
+python-dotenv
+Pillow
+pytesseract
+transformers
+torch
+google-generativeai
